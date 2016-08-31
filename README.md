@@ -29,12 +29,14 @@ None
 * `user_users.{n}.home`: [default: `/home/name` or `/name` for `root`]: Sets the user's home directory
 * `user_users.{n}.system`: [default: `false`]: If `true`, indicates that the user created is a system user
 * `user_users.{n}.authorized_keys`: [optional]: Sets ssh authorized public key(s) for the user
-* `user_users.{n}.authorized_keys_exclusive`: [optional]: Sets the above key(s) to be exclusive for the user (if not set, defaults to ansible defaults for authorized_key module, which is "no" at the moment)
+* `user_users.{n}.authorized_keys_manage_dir`: [optional]: Whether this module should manage the directory of the authorized key file (if not set, defaults to user_authorized_keys_manage_dir default var)
+* `user_users.{n}.authorized_keys_exclusive`: [optional]: Sets the above key(s) to be exclusive for the user (if not set, defaults to user_authorized_keys_exclusive default var)
 * `user_users.{n}.state`: [default: `present`]: Whether the user should be present or not on the remote host
 * `user_users.{n}.remove`: [default: `false`]: When used with `state=absent`, behavior is as with `userdel --remove`
 
 * `user_authorized_keys_path`: [optional]: Alternate path to the authorized_keys file [Default from ansible module: (homedir)+/.ssh/authorized_keys]
-* `user_authorized_keys_manage_dir`: [optional]: Be sure to set `manage_dir=no' if you are using an alternate directory for authorized_keys
+* `user_authorized_keys_manage_dir`: [optional]: Be sure to set `manage_dir=no' if you are using an alternate directory for authorized_keys (Default: yes)
+* `user_authorized_keys_exclusive`: [optional]: Whether to remove all other non-specified keys from the authorized_keys file. (Default: no)
 
 ## Dependencies
 

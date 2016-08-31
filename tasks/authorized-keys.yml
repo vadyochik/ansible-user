@@ -5,8 +5,8 @@
     user: "{{ item.name }}"
     key: "{{ item.authorized_keys }}"
     path: "{{ user_authorized_keys_path | default(omit) }}"
-    manage_dir: "{{ user_authorized_keys_manage_dir | default(omit) }}"
-    exclusive: "{{ item.authorized_keys_exclusive | default(omit) }}"
+    manage_dir: "{{ item.authorized_keys_manage_dir | default(user_authorized_keys_manage_dir) }}"
+    exclusive: "{{ item.authorized_keys_exclusive | default(user_authorized_keys_exclusive) }}"
     state: "{{ item.state | default('present') }}"
   with_items: "{{ user_users }}"
   when: item.authorized_keys is defined and not (item.state is defined and item.state == 'absent')

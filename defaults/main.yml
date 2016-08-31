@@ -2,3 +2,5 @@
 ---
 user_groups: []
 user_users: []
+user_authorized_keys_exclusive: no
+user_authorized_keys_manage_dir: yes
