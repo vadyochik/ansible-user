@@ -1,0 +1,23 @@
+# tasks file for user
+---
+- name: users | set up authorized_keys
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.authorized_keys }}"
+    path: "{{ user_authorized_keys_path | default(omit) }}"
+    manage_dir: "{{ user_authorized_keys_manage_dir | default(omit) }}"
+    exclusive: "{{ item.authorized_keys_exclusive | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ user_users }}"
+  when: item.authorized_keys is defined and not (item.state is defined and item.state == 'absent')
+  tags:
+    - user-authorized-keys
+
+- name: users | remove alternate authorized_keys file on user delete
+  file:
+    path: "{{ user_authorized_keys_path }}"
+    state: absent
+  with_items: "{{ user_users }}"
+  when: user_authorized_keys_path is defined and item.authorized_keys is defined and (item.state is defined and item.state == 'absent')
+  tags:
+    - user-authorized-keys

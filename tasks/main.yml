@@ -19,3 +19,9 @@
     - user
     - user-groups
     - user-groups-post
+
+- include: authorized-keys.yml
+  tags:
+    - configuration
+    - user
+    - user-authorized-keys
